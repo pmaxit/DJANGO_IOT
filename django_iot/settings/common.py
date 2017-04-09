@@ -148,7 +148,7 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 ########## CELERY CONFIGURATION
 # recommended settings: https://www.cloudamqp.com/docs/celery.html
-BROKER_POOL_LIMIT = 1  # Will decrease connection usage
+BROKER_POOL_LIMIT = 10  # Will decrease connection usage
 BROKER_HEARTBEAT = None  # We're using TCP keep-alive instead
 BROKER_CONNECTION_TIMEOUT = 30  # May require a long timeout due to Linux DNS timeouts etc
 CELERY_RESULT_BACKEND = None  # AMQP is not recommended as result backend as it creates thousands of queues
