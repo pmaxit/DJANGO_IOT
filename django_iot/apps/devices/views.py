@@ -35,8 +35,9 @@ def communicate(request, id):
 def controlGroup(request):
     
     ids = request.GET.get('deviceIds',"").split('-and-')
-    
+    devices = [Device.objects.get(pk=i).name for i in ids]
     cont = request.GET.get('cont','on')
+    set_attributes.delay(devices=devices, command=cont)
 
     data ={
         'ids': ids,
@@ -47,7 +48,9 @@ def controlGroup(request):
 def control(request):
     id = request.GET.get('id',1)
     cont   = request.GET.get('cont','on')
-    #set_attributes.delay(id, command = cont)
+    device = Device.objects.get(pk= id)
+    set_attributes.delay(devices=[device.name,], command = cont)
+
     data = {
         'id': id,
         'cont': cont
