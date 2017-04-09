@@ -1,0 +1,93 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% load i18n widget_tweaks %}
+{% block content %}
+
+{% block scripts %}
+  <script>
+  function control(device, cont){
+      console.log("Device ", device)
+
+       $.ajax({
+        url: '/control',
+        data: {
+          'id': device,
+          'cont': cont
+        },
+        dataType: 'json',
+        success: function (data) {
+          console.log(data)
+        }
+      });
+
+  }
+  </script>
+{% endblock %}
+<div class="jumbotron">
+      <div class="container">
+          <div class='row'>
+            <div class="col-md-3">
+                <h1 class="display-3"> {{device.name }}</h1>
+                <p>You can control your device from here.</p>
+            </div>
+            <div class="col-md-3">
+            </div>
+            
+            <div class="col-md-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> Parameter </th>
+                            <th> Value     </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> Device Internet Connection </td>
+                            <td> OK </td>
+                        <tr>
+                        <tr>
+                            <td> Average Power Usage </td>
+                            <td> 23.3 Watt / day </td>
+                        <tr>
+                        <tr>
+                            <td> Average Daily Usage </td>
+                            <td> 12 Hours / day </td>
+                        </tr>
+                        <tr>
+                            <td> Estimated Bill </td>
+                            <td> $30 </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        
+        <div class="col-md-6">
+          <h2>Light On </h2>
+          <p><button type='submit' class='control' onclick="control('{{device.id}}','on')">
+               <img id='control_on' src="{% static 'bulb.svg'' %}" width="120" height="120" />
+               </button>
+        </p>
+
+        </div>
+        <div class="col-md-6">
+          <h2>Light Off </h2>
+          <p><button type='submit' class='control' onclick="control('{{device.id}}','off')">
+               <img id='control_on' src="{% static 'bulboff.png'' %}" width="120" height="120" />
+               </button>
+        </p>
+        </div>
+      </div>
+</div>
+
+{% endblock %}

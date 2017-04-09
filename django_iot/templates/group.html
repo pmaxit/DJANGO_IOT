@@ -1,0 +1,102 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% load i18n widget_tweaks %}
+{% block content %}
+
+{% block scripts %}
+  <script>
+  function controlGroup(deviceIds, cont){
+      
+
+       $.ajax({
+        url: '/controlGroup',
+        data: {
+          'deviceIds': deviceIds.join("-and-"),
+          'cont': cont
+        },
+        dataType: 'json',
+        success: function (data) {
+          console.log(data)
+        }
+      });
+
+  }
+  </script>
+{% endblock %}
+<div class="jumbotron">
+      <div class="container">
+          <div class='row'>
+            <div class="col-md-3">
+                <h1 class="display-3">DEVICES</h1>
+                <p>
+                <ul>
+                    
+                {% for device in devices %}
+                    <li> {{ device.name }}</li>
+                {% endfor %}
+                </ul>
+                You can control all above devices from this page.
+                </p>
+                
+            </div>
+            <div class="col-md-3">
+            </div>
+            
+            <div class="col-md-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> Parameter </th>
+                            <th> Value     </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> Device Internet Connection </td>
+                            <td> OK(2/2) </td>
+                        <tr>
+                        <tr>
+                            <td> Average Power Usage </td>
+                            <td> 23.3 Watt / day </td>
+                        <tr>
+                        <tr>
+                            <td> Average Daily Usage </td>
+                            <td> 12 Hours / day </td>
+                        </tr>
+                        <tr>
+                            <td> Estimated Bill </td>
+                            <td> $30 </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        
+        <div class="col-md-6">
+          <h2>Light On </h2>
+          <p><button type='submit' class='control' onclick="controlGroup({{deviceIds}},'on')">
+               <img id='control_on' src="{% static 'bulb.svg'' %}" width="120" height="120" />
+               </button>
+        </p>
+
+        </div>
+        <div class="col-md-6">
+          <h2>Light Off </h2>
+          <p><button type='submit' class='control' onclick="controlGroup({{deviceIds}},'off')">
+               <img id='control_on' src="{% static 'bulboff.png'' %}" width="120" height="120" />
+               </button>
+        </p>
+        </div>
+      </div>
+</div>
+
+{% endblock %}

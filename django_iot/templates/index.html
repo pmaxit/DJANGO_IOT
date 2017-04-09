@@ -1,0 +1,34 @@
+
+{% extends 'base.html' %}
+
+{% load i18n widget_tweaks %}
+{% block content %}
+<div class="container">
+    <div class='row'>
+ <div class="col-6 col-md-3 sidebar-offcanvas" id="sidebar">
+     {% if devices %}
+     <h1> List of Devices </h1>
+          <div class="list-group">
+                   {% for device in devices %}
+                        <a href="{% url 'communicate' device.id %}" class='list-group-item'>{{ device.name }} </a>
+                    {% endfor %}
+            </div>
+    {% endif %}            
+</div>
+
+ <div class="col-6 col-md-3 sidebar-offcanvas" id="sidebar">
+     {% if devices and request.user.is_authenticated %}
+     <h1> List of Locations </h1>
+          <div class="list-group">
+                   {% for location in locations %}
+                        <a href="{% url 'group' location %}" class='list-group-item'>{{ location }} </a>
+                    {% endfor %}
+            </div>
+    {% endif %}            
+</div>
+</div>
+</div>
+    
+
+
+{% endblock %}
