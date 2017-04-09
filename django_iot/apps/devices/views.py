@@ -71,7 +71,7 @@ def control(request):
     id = request.GET.get('id',1)
     cont   = request.GET.get('cont','on')
     device = Device.objects.get(pk= id)
-    result = set_attributes.delay(devices=[device.name,], command = cont)
+    set_attributes.delay(devices=[device.name,], command = cont)
 
     data = {
         'id': id,

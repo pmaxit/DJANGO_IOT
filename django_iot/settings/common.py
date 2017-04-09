@@ -152,8 +152,8 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 BROKER_POOL_LIMIT = 10  # Will decrease connection usage
 BROKER_HEARTBEAT = None  # We're using TCP keep-alive instead
 BROKER_CONNECTION_TIMEOUT = 30  # May require a long timeout due to Linux DNS timeouts etc
-CELERY_RESULT_BACKEND = None  # AMQP is not recommended as result backend as it creates thousands of queues
+CELERY_RESULT_BACKEND = 'django-db'  # AMQP is not recommended as result backend as it creates thousands of queues
 CELERY_SEND_EVENTS = False  # Will not create celeryev.* queues
 CELERY_EVENT_QUEUE_EXPIRES = 60  # Will delete all celeryev. queues without consumers after 1 minute.
-BROKER_URL = os.environ.get('CLOUDAMQP_URL', 'amqp://')
+BROKER_URL = os.environ.get('CLOUDAMQP_URL', 'amqp://puneet:password@52.36.59.156/myhost')
 ########## END CELERY CONFIGURATION
