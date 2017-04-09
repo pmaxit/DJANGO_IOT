@@ -4,6 +4,8 @@ from django.http import HttpResponse, JsonResponse
 from django_iot.apps.interactions.tasks import *
 from .models import *
 
+from django.contrib.auth.decorators import login_required
+
 LOCATION_CHOICES = {
     '1': 'room',
     '2': 'living',
@@ -52,6 +54,7 @@ def control(request):
     }
     return JsonResponse(data)
 
+@login_required
 def index(request):
     devices_list = Device.objects.filter(user = request.user)
     location_list = Device.objects.filter(user=request.user).order_by('location').values('location').distinct()

@@ -61,6 +61,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'
 
 ROOT_URLCONF = 'django_iot.urls'
 
