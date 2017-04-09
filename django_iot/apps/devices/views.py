@@ -72,11 +72,10 @@ def control(request):
     cont   = request.GET.get('cont','on')
     device = Device.objects.get(pk= id)
     result = set_attributes.delay(devices=[device.name,], command = cont)
-    res = result.wait()
+
     data = {
         'id': id,
-        'cont': cont,
-        'result': res
+        'cont': cont
     }
     return JsonResponse(data)
 
