@@ -75,10 +75,10 @@ class Queue:
 
         if rpm % 2:
             print 'turning on the device'
-            set_attributes.delay(devices=[device,], command = "ON")
+            set_attributes.delay(devices=[device,], command = "on")
         else:
             print 'turning off the device'
-            set_attributes.delay(devices=[device,], command = "OFF")
+            set_attributes.delay(devices=[device,], command = "off")
 
     def poll(self, delta=1):
         oldk = -1
