@@ -71,8 +71,9 @@ class Queue:
     def checkMessage(self,msg):
         print 'Checking message', msg
         device = msg['device']
+        rpm = int(msg['rpm'])
 
-        if msg['rpm'] % 2:
+        if rpm % 2:
             print 'turning on the device'
             set_attributes.delay(devices=[device,], command = "ON")
         else:
