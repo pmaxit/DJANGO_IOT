@@ -5,9 +5,7 @@ from django_iot.apps.interactions.tasks import *
 from .models import *
 
 from django.contrib.auth.decorators import login_required
-import plotly.plotly as py
-import plotly.graph_objs as go
-py.sign_in('Prateek2211', 'sRGzVp2G8qlXjc2pvH7p')
+
 
 LOCATION_CHOICES = {
     '1': 'room',
@@ -31,23 +29,6 @@ def group(request, room):
 
 def communicate(request, id):
     context = {}
-    x = [-2,0,4,6,7]
-    y = [q**2-q+3 for q in x]
-    trace1 = {
-     "mode": "lines+markers", 
-    "stream": {
-    "maxpoints": 80, 
-    "token": "kacxk0yp7q"
-    }, 
-        "type": "scatter"
-    }
-
-    data=go.Data([trace1])
-    layout=go.Layout(title="Average Usage", xaxis={'title':'x1'}, yaxis={'title':'x2'})
-    figure=go.Figure(data=data,layout=layout)
-    div = py.plot(figure, auto_open=False, output_type='div')
-
-    context['graph'] = div
     
     device = Device.objects.get(pk=id)
     context['device'] = device
@@ -72,11 +53,10 @@ def control(request):
     cont   = request.GET.get('cont','on')
     device = Device.objects.get(pk= id)
     result = set_attributes.delay(devices=[device.name,], command = cont)
-    res = result.wait()
+    
     data = {
         'id': id,
-        'cont': cont,
-        'result': res
+        'cont': cont
     }
     return JsonResponse(data)
 

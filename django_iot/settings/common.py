@@ -46,7 +46,8 @@ INSTALLED_APPS = (
     'django_iot.apps.observations',
     'django_iot.apps.interactions',
     'bootstrapform',
-    'clear_cache'
+    'clear_cache',
+    'webpack_loader'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -94,6 +95,14 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'assets/bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+    }
+}
+
 
 # Update database configuration with $DATABASE_URL.
 db_from_env = dj_database_url.config()

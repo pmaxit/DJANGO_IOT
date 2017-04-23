@@ -1,5 +1,6 @@
 
 {% extends 'base.html' %}
+{% load render_bundle from webpack_loader %}
 {% load static %}
 
 {% load i18n widget_tweaks %}
@@ -8,8 +9,6 @@
 {% block scripts %}
   <script>
   function controlGroup(deviceIds, cont){
-      
-
        $.ajax({
         url: '/controlGroup',
         data: {
@@ -45,32 +44,8 @@
             </div>
             
             <div class="col-md-6">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th> Parameter </th>
-                            <th> Value     </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td> Device Internet Connection </td>
-                            <td> OK(2/2) </td>
-                        <tr>
-                        <tr>
-                            <td> Average Power Usage </td>
-                            <td> 23.3 Watt / day </td>
-                        <tr>
-                        <tr>
-                            <td> Average Daily Usage </td>
-                            <td> 12 Hours / day </td>
-                        </tr>
-                        <tr>
-                            <td> Estimated Bill </td>
-                            <td> $30 </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div id="react-app"></div>
+                {% render_bundle 'main' %}
             </div>
           </div>
         
