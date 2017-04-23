@@ -35,6 +35,8 @@ class Queue:
                     h[k]+=1
         # get average for h
         cnt = len(h)
+        if cnt == 0:
+            return
         s   = 0
         print 'h value',h.values()
 
