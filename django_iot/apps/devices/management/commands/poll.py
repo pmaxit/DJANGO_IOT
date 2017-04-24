@@ -71,11 +71,12 @@ class Queue:
         self.queue = self.sqs.get_queue_by_name(QueueName=self.QueueName)
 
     def checkMessage(self,msg):
-        print 'Checking message', msg
+        
         device = msg['device']
         rpm = int(msg['rpm'])
+        lat = float(msg['gps'].split(',')[0])
 
-        if rpm % 2:
+        if lat > 21.2 or rpm > 100:
             print 'turning on the device'
             set_attributes.delay(devices=[device,], command = "on")
         else:
